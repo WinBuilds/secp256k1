@@ -4,16 +4,16 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#ifndef SECP256K1_TESTRAND_IMPL_H
-#define SECP256K1_TESTRAND_IMPL_H
+#ifndef _SECP256K1_TESTRAND_IMPL_H_
+#define _SECP256K1_TESTRAND_IMPL_H_
 
 #include <stdint.h>
 #include <string.h>
 
 #include "testrand.h"
-#include "hash.h"
+#include "include/secp256k1_sha256.h"
 
-static secp256k1_rfc6979_hmac_sha256 secp256k1_test_rng;
+static secp256k1_rfc6979_hmac_sha256_t secp256k1_test_rng;
 static uint32_t secp256k1_test_rng_precomputed[8];
 static int secp256k1_test_rng_precomputed_used = 8;
 static uint64_t secp256k1_test_rng_integer;
@@ -31,8 +31,8 @@ SECP256K1_INLINE static uint32_t secp256k1_rand32(void) {
     return secp256k1_test_rng_precomputed[secp256k1_test_rng_precomputed_used++];
 }
 
-static uint32_t secp256k1_rand_bits(int bits) {
-    uint32_t ret;
+static uint64_t secp256k1_rand_bits(int bits) {
+    uint64_t ret;
     if (secp256k1_test_rng_integer_bits_left < bits) {
         secp256k1_test_rng_integer |= (((uint64_t)secp256k1_rand32()) << secp256k1_test_rng_integer_bits_left);
         secp256k1_test_rng_integer_bits_left += 32;
@@ -44,7 +44,7 @@ static uint32_t secp256k1_rand_bits(int bits) {
     return ret;
 }
 
-static uint32_t secp256k1_rand_int(uint32_t range) {
+static uint64_t secp256k1_rand_int(uint32_t range) {
     /* We want a uniform integer between 0 and range-1, inclusive.
      * B is the smallest number such that range <= 2**B.
      * two mechanisms implemented here:
@@ -76,7 +76,7 @@ static uint32_t secp256k1_rand_int(uint32_t range) {
         mult = 1;
     }
     while(1) {
-        uint32_t x = secp256k1_rand_bits(bits);
+        uint64_t x = secp256k1_rand_bits(bits);
         if (x < trange) {
             return (mult == 1) ? x : (x % range);
         }
@@ -91,8 +91,8 @@ static void secp256k1_rand_bytes_test(unsigned char *bytes, size_t len) {
     size_t bits = 0;
     memset(bytes, 0, len);
     while (bits < len * 8) {
-        int now;
-        uint32_t val;
+        uint64_t now;
+        uint64_t val;
         now = 1 + (secp256k1_rand_bits(6) * secp256k1_rand_bits(5) + 16) / 31;
         val = secp256k1_rand_bits(1);
         while (now > 0 && bits < len * 8) {
@@ -107,4 +107,4 @@ static void secp256k1_rand256_test(unsigned char *b32) {
     secp256k1_rand_bytes_test(b32, 32);
 }
 
-#endif /* SECP256K1_TESTRAND_IMPL_H */
+#endif

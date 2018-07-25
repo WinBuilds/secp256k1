@@ -4,8 +4,8 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#ifndef SECP256K1_SCALAR_REPR_IMPL_H
-#define SECP256K1_SCALAR_REPR_IMPL_H
+#ifndef _SECP256K1_SCALAR_REPR_IMPL_H_
+#define _SECP256K1_SCALAR_REPR_IMPL_H_
 
 /* Limbs of the secp256k1 order. */
 #define SECP256K1_N_0 ((uint32_t)0xD0364141UL)
@@ -130,7 +130,7 @@ static int secp256k1_scalar_add(secp256k1_scalar *r, const secp256k1_scalar *a, 
     r->d[6] = t & 0xFFFFFFFFULL; t >>= 32;
     t += (uint64_t)a->d[7] + b->d[7];
     r->d[7] = t & 0xFFFFFFFFULL; t >>= 32;
-    overflow = t + secp256k1_scalar_check_overflow(r);
+    overflow = (int)(t + secp256k1_scalar_check_overflow(r));
     VERIFY_CHECK(overflow == 0 || overflow == 1);
     secp256k1_scalar_reduce(r, overflow);
     return overflow;
@@ -268,7 +268,7 @@ static int secp256k1_scalar_cond_negate(secp256k1_scalar *r, int flag) {
     { \
         uint64_t t = (uint64_t)a * b; \
         th = t >> 32;         /* at most 0xFFFFFFFE */ \
-        tl = t; \
+        tl = (uint32_t)t; \
     } \
     c0 += tl;                 /* overflow is handled on the next line */ \
     th += (c0 < tl) ? 1 : 0;  /* at most 0xFFFFFFFF */ \
@@ -283,7 +283,7 @@ static int secp256k1_scalar_cond_negate(secp256k1_scalar *r, int flag) {
     { \
         uint64_t t = (uint64_t)a * b; \
         th = t >> 32;         /* at most 0xFFFFFFFE */ \
-        tl = t; \
+        tl = (uint32_t)t; \
     } \
     c0 += tl;                 /* overflow is handled on the next line */ \
     th += (c0 < tl) ? 1 : 0;  /* at most 0xFFFFFFFF */ \
@@ -297,7 +297,7 @@ static int secp256k1_scalar_cond_negate(secp256k1_scalar *r, int flag) {
     { \
         uint64_t t = (uint64_t)a * b; \
         th = t >> 32;               /* at most 0xFFFFFFFE */ \
-        tl = t; \
+        tl = (uint32_t)t; \
     } \
     th2 = th + th;                  /* at most 0xFFFFFFFE (in case th was 0x7FFFFFFF) */ \
     c2 += (th2 < th) ? 1 : 0;       /* never overflows by contract (verified the next line) */ \
@@ -485,7 +485,7 @@ static void secp256k1_scalar_reduce_512(secp256k1_scalar *r, const uint32_t *l) 
     r->d[7] = c & 0xFFFFFFFFUL; c >>= 32;
 
     /* Final reduction of r. */
-    secp256k1_scalar_reduce(r, c + secp256k1_scalar_check_overflow(r));
+    secp256k1_scalar_reduce(r, (uint32_t)(c + secp256k1_scalar_check_overflow(r)));
 }
 
 static void secp256k1_scalar_mul_512(uint32_t *l, const secp256k1_scalar *a, const secp256k1_scalar *b) {
@@ -718,4 +718,4 @@ SECP256K1_INLINE static void secp256k1_scalar_mul_shift_var(secp256k1_scalar *r,
     secp256k1_scalar_cadd_bit(r, 0, (l[(shift - 1) >> 5] >> ((shift - 1) & 0x1f)) & 1);
 }
 
-#endif /* SECP256K1_SCALAR_REPR_IMPL_H */
+#endif

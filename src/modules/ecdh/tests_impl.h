@@ -4,14 +4,15 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#ifndef SECP256K1_MODULE_ECDH_TESTS_H
-#define SECP256K1_MODULE_ECDH_TESTS_H
+#ifndef _SECP256K1_MODULE_ECDH_TESTS_
+#define _SECP256K1_MODULE_ECDH_TESTS_
 
 void test_ecdh_api(void) {
     /* Setup context that just counts errors */
     secp256k1_context *tctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
     secp256k1_pubkey point;
     unsigned char res[32];
+    unsigned char raw_res[33];
     unsigned char s_one[32] = { 0 };
     int32_t ecount = 0;
     s_one[31] = 1;
@@ -31,6 +32,14 @@ void test_ecdh_api(void) {
     CHECK(ecount == 3);
     CHECK(secp256k1_ecdh(tctx, res, &point, s_one) == 1);
     CHECK(ecount == 3);
+    CHECK(secp256k1_ecdh_raw(tctx, raw_res, &point, s_one) == 1);
+    CHECK(ecount == 3);
+    CHECK(secp256k1_ecdh_raw(tctx, NULL, &point, s_one) == 0);
+    CHECK(ecount == 4);
+    CHECK(secp256k1_ecdh_raw(tctx, raw_res, NULL, s_one) == 0);
+    CHECK(ecount == 5);
+    CHECK(secp256k1_ecdh_raw(tctx, raw_res, &point, NULL) == 0);
+    CHECK(ecount == 6);
 
     /* Cleanup */
     secp256k1_context_destroy(tctx);
@@ -44,7 +53,7 @@ void test_ecdh_generator_basepoint(void) {
     s_one[31] = 1;
     /* Check against pubkey creation when the basepoint is the generator */
     for (i = 0; i < 100; ++i) {
-        secp256k1_sha256 sha;
+        secp256k1_sha256_t sha;
         unsigned char s_b32[32];
         unsigned char output_ecdh[32];
         unsigned char output_ser[32];
@@ -102,4 +111,4 @@ void run_ecdh_tests(void) {
     test_bad_scalar();
 }
 
-#endif /* SECP256K1_MODULE_ECDH_TESTS_H */
+#endif

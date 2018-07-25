@@ -5,8 +5,8 @@
  **********************************************************************/
 
 
-#ifndef SECP256K1_ECDSA_IMPL_H
-#define SECP256K1_ECDSA_IMPL_H
+#ifndef _SECP256K1_ECDSA_IMPL_H_
+#define _SECP256K1_ECDSA_IMPL_H_
 
 #include "scalar.h"
 #include "field.h"
@@ -46,7 +46,7 @@ static const secp256k1_fe secp256k1_ecdsa_const_p_minus_order = SECP256K1_FE_CON
     0, 0, 0, 1, 0x45512319UL, 0x50B75FC4UL, 0x402DA172UL, 0x2FC9BAEEUL
 );
 
-static int secp256k1_der_read_len(const unsigned char **sigp, const unsigned char *sigend) {
+static size_t secp256k1_der_read_len(const unsigned char **sigp, const unsigned char *sigend) {
     int lenleft, b1;
     size_t ret = 0;
     if (*sigp >= sigend) {
@@ -81,6 +81,8 @@ static int secp256k1_der_read_len(const unsigned char **sigp, const unsigned cha
         return -1;
     }
     while (lenleft > 0) {
+        if ((ret >> ((sizeof(size_t) - 1) * 8)) != 0) {
+        }
         ret = (ret << 8) | **sigp;
         if (ret + lenleft > (size_t)(sigend - *sigp)) {
             /* Result exceeds the length of the passed array. */
@@ -99,7 +101,7 @@ static int secp256k1_der_read_len(const unsigned char **sigp, const unsigned cha
 static int secp256k1_der_parse_integer(secp256k1_scalar *r, const unsigned char **sig, const unsigned char *sigend) {
     int overflow = 0;
     unsigned char ra[32] = {0};
-    int rlen;
+    size_t rlen;
 
     if (*sig == sigend || **sig != 0x02) {
         /* Not a primitive integer (X.690-0207 8.3.1). */
@@ -144,7 +146,7 @@ static int secp256k1_der_parse_integer(secp256k1_scalar *r, const unsigned char 
 
 static int secp256k1_ecdsa_sig_parse(secp256k1_scalar *rr, secp256k1_scalar *rs, const unsigned char *sig, size_t size) {
     const unsigned char *sigend = sig + size;
-    int rlen;
+    size_t rlen;
     if (sig == sigend || *(sig++) != 0x30) {
         /* The encoding doesn't start with a constructed sequence (X.690-0207 8.9.1). */
         return 0;
@@ -188,12 +190,12 @@ static int secp256k1_ecdsa_sig_serialize(unsigned char *sig, size_t *size, const
     }
     *size = 6 + lenS + lenR;
     sig[0] = 0x30;
-    sig[1] = 4 + lenS + lenR;
+    sig[1] = (unsigned char)( 4 + lenS + lenR);
     sig[2] = 0x02;
-    sig[3] = lenR;
+    sig[3] = (unsigned char)lenR;
     memcpy(sig+4, rp, lenR);
     sig[4+lenR] = 0x02;
-    sig[5+lenR] = lenS;
+    sig[5+lenR] = (unsigned char)lenS;
     memcpy(sig+lenR+6, sp, lenS);
     return 1;
 }
@@ -310,4 +312,4 @@ static int secp256k1_ecdsa_sig_sign(const secp256k1_ecmult_gen_context *ctx, sec
     return 1;
 }
 
-#endif /* SECP256K1_ECDSA_IMPL_H */
+#endif

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="modules">
+      <UniqueIdentifier>{34f146aa-5ba5-46bb-b60e-384b44a1e921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\ecdh">
+      <UniqueIdentifier>{668a2ed1-80d9-481e-a24b-42225600c5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\rangeproof">
+      <UniqueIdentifier>{33c69c8a-9dd1-4c62-b228-6443e9037f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules\recovery">
+      <UniqueIdentifier>{b97b8cb3-312c-4162-9eee-b0f598be1d73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\secp256k1.h" />
+    <ClInclude Include="..\..\include\secp256k1_ecdh.h" />
+    <ClInclude Include="..\..\include\secp256k1_rangeproof.h" />
+    <ClInclude Include="..\..\include\secp256k1_recovery.h" />
+    <ClInclude Include="..\..\include\secp256k1_schnorr.h" />
+    <ClInclude Include="..\..\include\secp256k1_sha256.h" />
+    <ClInclude Include="..\..\src\basic-config.h" />
+    <ClInclude Include="..\..\src\ecdsa.h" />
+    <ClInclude Include="..\..\src\ecdsa_impl.h" />
+    <ClInclude Include="..\..\src\eckey.h" />
+    <ClInclude Include="..\..\src\eckey_impl.h" />
+    <ClInclude Include="..\..\src\ecmult.h" />
+    <ClInclude Include="..\..\src\ecmult_const.h" />
+    <ClInclude Include="..\..\src\ecmult_const_impl.h" />
+    <ClInclude Include="..\..\src\ecmult_gen.h" />
+    <ClInclude Include="..\..\src\ecmult_gen_impl.h" />
+    <ClInclude Include="..\..\src\ecmult_impl.h" />
+    <ClInclude Include="..\..\src\ecmult_static_context.h" />
+    <ClInclude Include="..\..\src\field.h" />
+    <ClInclude Include="..\..\src\field_5x52.h" />
+    <ClInclude Include="..\..\src\field_5x52_asm_impl.h" />
+    <ClInclude Include="..\..\src\field_5x52_impl.h" />
+    <ClInclude Include="..\..\src\field_5x52_int128_impl.h" />
+    <ClInclude Include="..\..\src\field_10x26.h" />
+    <ClInclude Include="..\..\src\field_10x26_impl.h" />
+    <ClInclude Include="..\..\src\field_impl.h" />
+    <ClInclude Include="..\..\src\group.h" />
+    <ClInclude Include="..\..\src\group_impl.h" />
+    <ClInclude Include="..\..\src\hash.h" />
+    <ClInclude Include="..\..\src\hash_impl.h" />
+    <ClInclude Include="..\..\src\num.h" />
+    <ClInclude Include="..\..\src\num_gmp.h" />
+    <ClInclude Include="..\..\src\num_gmp_impl.h" />
+    <ClInclude Include="..\..\src\num_impl.h" />
+    <ClInclude Include="..\..\src\scalar.h" />
+    <ClInclude Include="..\..\src\scalar_4x64.h" />
+    <ClInclude Include="..\..\src\scalar_4x64_impl.h" />
+    <ClInclude Include="..\..\src\scalar_8x32.h" />
+    <ClInclude Include="..\..\src\scalar_8x32_impl.h" />
+    <ClInclude Include="..\..\src\scalar_impl.h" />
+    <ClInclude Include="..\..\src\scalar_low.h" />
+    <ClInclude Include="..\..\src\scalar_low_impl.h" />
+    <ClInclude Include="..\..\src\scratch.h" />
+    <ClInclude Include="..\..\src\scratch_impl.h" />
+    <ClInclude Include="..\..\src\util.h" />
+    <ClInclude Include="..\..\src\modules\ecdh\main_impl.h">
+      <Filter>modules\ecdh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\ecdh\tests_impl.h">
+      <Filter>modules\ecdh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\recovery\main_impl.h">
+      <Filter>modules\recovery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\recovery\tests_impl.h">
+      <Filter>modules\recovery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\borromean.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\borromean_impl.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\main_impl.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\pedersen.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\pedersen_impl.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\rangeproof.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\rangeproof_impl.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\modules\rangeproof\tests_impl.h">
+      <Filter>modules\rangeproof</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\secp256k1.c" />
+  </ItemGroup>
+</Project>
