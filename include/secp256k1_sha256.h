@@ -10,6 +10,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "secp256k1_exports.h"
+
 # ifdef __cplusplus
 extern "C" {
 # endif
