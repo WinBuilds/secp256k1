@@ -1735,18 +1735,18 @@ void run_field_inv_all_var(void) {
     secp256k1_fe x[16], xi[16], xii[16];
     int i;
     /* Check it's safe to call for 0 elements */
-    secp256k1_fe_inv_all_var(xi, x, 0);
+    secp256k1_fe_inv_all_var(0, xi, x);
     for (i = 0; i < count; i++) {
         size_t j;
         size_t len = secp256k1_rand_int(15) + 1;
         for (j = 0; j < len; j++) {
             random_fe_non_zero(&x[j]);
         }
-        secp256k1_fe_inv_all_var(xi, x, len);
+        secp256k1_fe_inv_all_var(len, xi, x);
         for (j = 0; j < len; j++) {
             CHECK(check_fe_inverse(&x[j], &xi[j]));
         }
-        secp256k1_fe_inv_all_var(xii, xi, len);
+        secp256k1_fe_inv_all_var(len, xii, xi);
         for (j = 0; j < len; j++) {
             CHECK(check_fe_equal(&x[j], &xii[j]));
         }
@@ -1776,7 +1776,7 @@ void test_sqrt(const secp256k1_fe *a, const secp256k1_fe *k) {
     CHECK((v == 0) == (k == NULL));
 
     if (k != NULL) {
-        // Check that the returned root is +/- the given known answer 
+        // Check that the returned root is +/- the given known answer
         secp256k1_fe_negate(&r2, &r1, 1);
         secp256k1_fe_add(&r1, k); secp256k1_fe_add(&r2, k);
         secp256k1_fe_normalize(&r1); secp256k1_fe_normalize(&r2);
@@ -1788,12 +1788,12 @@ void run_sqrt(void) {
     secp256k1_fe ns, x, s, t;
     int i;
 
-    // Check sqrt(0) is 0 
+    // Check sqrt(0) is 0
     secp256k1_fe_set_int(&x, 0);
     secp256k1_fe_sqr(&s, &x);
     test_sqrt(&s, &x);
 
-    // Check sqrt of small squares (and their negatives) 
+    // Check sqrt of small squares (and their negatives)
     for (i = 1; i <= 100; i++) {
         secp256k1_fe_set_int(&x, i);
         secp256k1_fe_sqr(&s, &x);
@@ -1802,7 +1802,7 @@ void run_sqrt(void) {
         test_sqrt(&t, NULL);
     }
 
-    // Consistency checks for large random values 
+    // Consistency checks for large random values
     for (i = 0; i < 10; i++) {
         int j;
         random_fe_non_square(&ns);
@@ -1933,7 +1933,7 @@ void test_ge(void) {
                 zs[i] = gej[i].z;
             }
         }
-        secp256k1_fe_inv_all_var(zinv, zs, 4 * runs + 1);
+        secp256k1_fe_inv_all_var(4 * runs + 1, zinv, zs );
         free(zs);
     }
 
@@ -2053,8 +2053,8 @@ void test_ge(void) {
                 secp256k1_fe_mul(&zr[i + 1], &zinv[i], &gej[i + 1].z);
             }
         }
-        secp256k1_ge_set_table_gej_var(ge_set_table, gej, zr, 4 * runs + 1);
-        secp256k1_ge_set_all_gej_var(ge_set_all, gej, 4 * runs + 1, &ctx->error_callback);
+        secp256k1_ge_set_table_gej_var(4 * runs + 1, ge_set_table, gej, zr);
+        secp256k1_ge_set_all_gej_var(4 * runs + 1, ge_set_all, gej, &ctx->error_callback);
         for (i = 0; i < 4 * runs + 1; i++) {
             secp256k1_fe s;
             random_fe_non_zero(&s);
@@ -2180,13 +2180,13 @@ void run_ec_combine(void) {
 }
 /*
 void test_group_decompress(const secp256k1_fe* x) {
-    // The input itself, normalized. 
+    // The input itself, normalized.
     secp256k1_fe fex = *x;
     secp256k1_fe fez;
-    // Results of set_xquad_var, set_xo_var(..., 0), set_xo_var(..., 1). 
+    // Results of set_xquad_var, set_xo_var(..., 0), set_xo_var(..., 1).
     secp256k1_ge ge_quad, ge_even, ge_odd;
     secp256k1_gej gej_quad;
-    // Return values of the above calls. 
+    // Return values of the above calls.
     int res_quad, res_even, res_odd;
 
     secp256k1_fe_normalize_var(&fex);
@@ -2206,24 +2206,24 @@ void test_group_decompress(const secp256k1_fe* x) {
         secp256k1_fe_normalize_var(&ge_odd.y);
         secp256k1_fe_normalize_var(&ge_even.y);
 
-        // No infinity allowed. 
+        // No infinity allowed.
         CHECK(!ge_quad.infinity);
         CHECK(!ge_even.infinity);
         CHECK(!ge_odd.infinity);
 
-        // Check that the x coordinates check out. 
+        // Check that the x coordinates check out.
         CHECK(secp256k1_fe_equal_var(&ge_quad.x, x));
         CHECK(secp256k1_fe_equal_var(&ge_even.x, x));
         CHECK(secp256k1_fe_equal_var(&ge_odd.x, x));
 
-        // Check that the Y coordinate result in ge_quad is a square. 
+        // Check that the Y coordinate result in ge_quad is a square.
         CHECK(secp256k1_fe_is_quad_var(&ge_quad.y));
 
-        // Check odd/even Y in ge_odd, ge_even. 
+        // Check odd/even Y in ge_odd, ge_even.
         CHECK(secp256k1_fe_is_odd(&ge_odd.y));
         CHECK(!secp256k1_fe_is_odd(&ge_even.y));
 
-        // Check secp256k1_gej_has_quad_y_var. 
+        // Check secp256k1_gej_has_quad_y_var.
         secp256k1_gej_set_ge(&gej_quad, &ge_quad);
         CHECK(secp256k1_gej_has_quad_y_var(&gej_quad));
         do {
@@ -4395,6 +4395,10 @@ void run_ecdsa_openssl(void) {
 # include "modules/recovery/tests_impl.h"
 #endif
 
+#ifdef ENABLE_MODULE_RANGEPROOF
+# include "modules/rangeproof/tests_impl.h"
+#endif
+
 int main(int argc, char **argv) {
     unsigned char seed16[16] = {0};
     unsigned char run32[32] = {0};
@@ -4504,18 +4508,22 @@ int main(int argc, char **argv) {
     run_ecdsa_sign_verify();
     run_ecdsa_end_to_end();
     run_ecdsa_edge_cases();
+
 #ifdef ENABLE_OPENSSL_TESTS
     run_ecdsa_openssl();
 #endif
 
 #ifdef ENABLE_MODULE_SCHNORR
-    /* Schnorr tests */
     run_schnorr_tests();
 #endif
 
 #ifdef ENABLE_MODULE_RECOVERY
     /* ECDSA pubkey recovery tests */
     run_recovery_tests();
+#endif
+
+#ifdef ENABLE_MODULE_RANGEPROOF
+    run_rangeproof_tests();
 #endif
 
     secp256k1_rand256(run32);

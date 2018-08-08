@@ -12,6 +12,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "secp256k1dll", "secp256k1dl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C1929CCD-7103-4FD4-BDFA-2BBCE7D27F83}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests.vcxproj", "{EF220FDB-0A26-45F1-AF53-DA856E4017E0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exhaustive_tests", "exhaustive_tests.vcxproj", "{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -36,8 +40,28 @@ Global
 		{EAB4016A-43B3-4286-836B-5765FEC6FBB5}.Release|x64.Build.0 = Release|x64
 		{EAB4016A-43B3-4286-836B-5765FEC6FBB5}.Release|x86.ActiveCfg = Release|Win32
 		{EAB4016A-43B3-4286-836B-5765FEC6FBB5}.Release|x86.Build.0 = Release|Win32
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Debug|x64.ActiveCfg = Debug|x64
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Debug|x64.Build.0 = Debug|x64
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Debug|x86.ActiveCfg = Debug|Win32
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Debug|x86.Build.0 = Debug|Win32
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Release|x64.ActiveCfg = Release|x64
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Release|x64.Build.0 = Release|x64
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Release|x86.ActiveCfg = Release|Win32
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0}.Release|x86.Build.0 = Release|Win32
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Debug|x64.ActiveCfg = Debug|x64
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Debug|x64.Build.0 = Debug|x64
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Debug|x86.ActiveCfg = Debug|Win32
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Debug|x86.Build.0 = Debug|Win32
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Release|x64.ActiveCfg = Release|x64
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Release|x64.Build.0 = Release|x64
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Release|x86.ActiveCfg = Release|Win32
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF220FDB-0A26-45F1-AF53-DA856E4017E0} = {C1929CCD-7103-4FD4-BDFA-2BBCE7D27F83}
+		{7CF3D514-21B7-4404-9FB0-6073EF3A76E6} = {C1929CCD-7103-4FD4-BDFA-2BBCE7D27F83}
 	EndGlobalSection
 EndGlobal
