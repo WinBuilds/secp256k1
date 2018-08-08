@@ -7,7 +7,8 @@
 #ifndef _SECP256K1_HASH_IMPL_H_
 #define _SECP256K1_HASH_IMPL_H_
 
-#include "hash.h"
+//#include "hash.h"
+#include "secp256k1_sha256.h"
 
 #include <stdlib.h>
 #include <stdint.h>
@@ -33,7 +34,7 @@
 #define BE32(p) ((((p) & 0xFF) << 24) | (((p) & 0xFF00) << 8) | (((p) & 0xFF0000) >> 8) | (((p) & 0xFF000000) >> 24))
 #endif
 
-static void secp256k1_sha256_initialize(secp256k1_sha256_t *hash) {
+void secp256k1_sha256_initialize(secp256k1_sha256_t *hash) {
     hash->s[0] = 0x6a09e667ul;
     hash->s[1] = 0xbb67ae85ul;
     hash->s[2] = 0x3c6ef372ul;
@@ -46,7 +47,7 @@ static void secp256k1_sha256_initialize(secp256k1_sha256_t *hash) {
 }
 
 /** Perform one SHA-256 transformation, processing 16 big endian 32-bit words. */
-static void secp256k1_sha256_transform(uint32_t* s, const uint32_t* chunk) {
+void secp256k1_sha256_transform(uint32_t* s, const uint32_t* chunk) {
     uint32_t a = s[0], b = s[1], c = s[2], d = s[3], e = s[4], f = s[5], g = s[6], h = s[7];
     uint32_t w0, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15;
 
@@ -128,7 +129,7 @@ static void secp256k1_sha256_transform(uint32_t* s, const uint32_t* chunk) {
     s[7] += h;
 }
 
-static void secp256k1_sha256_write(secp256k1_sha256_t *hash, const unsigned char *data, size_t len) {
+void secp256k1_sha256_write(secp256k1_sha256_t *hash, const unsigned char *data, size_t len) {
     size_t bufsize = hash->bytes & 0x3F;
     hash->bytes += len;
     while (bufsize + len >= 64) {
@@ -145,7 +146,7 @@ static void secp256k1_sha256_write(secp256k1_sha256_t *hash, const unsigned char
     }
 }
 
-static void secp256k1_sha256_finalize(secp256k1_sha256_t *hash, unsigned char *out32) {
+void secp256k1_sha256_finalize(secp256k1_sha256_t *hash, unsigned char *out32) {
     static const unsigned char pad[64] = {0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     uint32_t sizedesc[2];
     uint32_t out[8];

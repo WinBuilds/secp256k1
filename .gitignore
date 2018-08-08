@@ -69,6 +69,8 @@ build/
 [Bb]in/
 [Oo]bj/
 [Ll]ibs/
+/build-*/
+/build_*/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -102,14 +104,14 @@ build/
 
 # Visual C++ cache files
 ipch/
+.vs/
 *.aps
 *.ncb
 *.opensdf
 *.sdf
 *.cachefile
-*.db
-*.vs
-*.opendb
+*.VC.db
+*.VC.opendb
 
 # Visual Studio profiler
 *.psess
