@@ -156,6 +156,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;HAVE_CONFIG_H;ENABLE_MODULE_RECOVERY;ENABLE_MODULE_ECDH;USE_ECMULT_STATIC_PRECOMPUTATION;USE_FIELD_INV_BUILTIN;USE_NUM_NONE;USE_SCALAR_INV_BUILTIN;USE_FIELD_10X26;USE_SCALAR_8X32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>../..;../../src;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -179,6 +180,7 @@ xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Pl
       <PreprocessorDefinitions>_DEBUG;_LIB;HAVE_CONFIG_H;ENABLE_MODULE_RECOVERY;ENABLE_MODULE_ECDH;USE_ECMULT_STATIC_PRECOMPUTATION;USE_FIELD_INV_BUILTIN;USE_NUM_NONE;USE_SCALAR_INV_BUILTIN;USE_FIELD_10X26;USE_SCALAR_8X32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>../..;../../src;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

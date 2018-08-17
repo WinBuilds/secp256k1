@@ -108,6 +108,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SECP256K1_BUILD;HAVE_CONFIG_H;ENABLE_MODULE_RECOVERY;ENABLE_MODULE_ECDH;USE_ECMULT_STATIC_PRECOMPUTATION;USE_FIELD_INV_BUILTIN;USE_NUM_NONE;USE_SCALAR_INV_BUILTIN;USE_FIELD_10X26;USE_SCALAR_8X32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,6 +124,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;SECP256K1_BUILD;HAVE_CONFIG_H;ENABLE_MODULE_RECOVERY;ENABLE_MODULE_ECDH;USE_ECMULT_STATIC_PRECOMPUTATION;USE_FIELD_INV_BUILTIN;USE_NUM_NONE;USE_SCALAR_INV_BUILTIN;USE_FIELD_10X26;USE_SCALAR_8X32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
