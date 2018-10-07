@@ -85,6 +85,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>secp256k1lib</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectRoot>$(WINBUILDS_ROOT)</ProjectRoot>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -132,20 +133,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(WINBUILDS_ROOT)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -166,8 +167,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
-xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
+      <Command>mkdir "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
+xcopy "$(SolutionDir)..\..\include" "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -187,8 +188,8 @@ xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Pl
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
-xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
+      <Command>mkdir "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
+xcopy "$(SolutionDir)..\..\include" "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -214,8 +215,8 @@ xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Pl
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
-xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
+      <Command>mkdir "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
+xcopy "$(SolutionDir)..\..\include" "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -238,8 +239,8 @@ xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Pl
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
-xcopy "$(SolutionDir)..\..\include" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
+      <Command>mkdir "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\"
+xcopy "$(SolutionDir)..\..\include" "$(WINBUILDS_ROOT)build_msvc14_$(Platform)\$(Configuration)\include\secp256k1\" /E /I /R /Y /D
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
